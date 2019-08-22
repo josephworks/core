@@ -45,37 +45,39 @@
             <url>https://github.com/Strezzed/strezz-central/raw/repository/</url>
         </repository>
         <repository>
-            <id>maven-public</id>
-            <url>http://nexus.ihaq.me/repository/maven-public/</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>16.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.boxysystems</groupId>
+            <groupId>com.github.siddii</groupId>
             <artifactId>jgoogleanalytics</artifactId>
-            <version>0.5</version>
+            <version>master-eb53efd6b5-1</version>
         </dependency>
         <dependency>
-            <groupId>me.ihaq</groupId>
+            <groupId>com.github.haq</groupId>
             <artifactId>imgur-uploader</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>me.ihaq</groupId>
+            <groupId>com.github.haq</groupId>
             <artifactId>command-manager</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>me.ihaq</groupId>
+            <groupId>com.github.haq</groupId>
             <artifactId>event-manager</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>16.0.2</version>
+        </dependency>
+
         <dependency>
             <groupId>net.minecraft</groupId>
             <artifactId>minecraft</artifactId>
