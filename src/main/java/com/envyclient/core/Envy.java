@@ -7,9 +7,11 @@ import com.envyclient.core.util.Loader;
 import com.envyclient.core.util.web.Callback;
 import com.envyclient.core.util.web.WebUtils;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.ihaq.eventmanager.EventManager;
 import me.ihaq.imguruploader.ImgurUploader;
+import optifine.Json;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
@@ -46,10 +48,11 @@ public class Envy implements Loader {
         public void enable() {
             Display.setTitle(NAME + " v" + VERSION);
 
-            WebUtils.getLatestVersion(new Callback<Double>() {
+            WebUtils.getLatestVersion(new Callback<JsonObject>() {
                 @Override
-                public void onSuccess(Double e) {
-                    if (e > VERSION) {
+                public void onSuccess(JsonObject e) {
+                    double version = e.get("version").getAsDouble();
+                    if (version > VERSION) {
                         UPDATE_TEXT = ChatFormatting.RED + "Outdated" + ChatFormatting.RESET + " version.";
                     } else {
                         UPDATE_TEXT = ChatFormatting.GREEN + "Latest" + ChatFormatting.RESET + " version.";
@@ -89,7 +92,6 @@ public class Envy implements Loader {
 
         @Override
         public void enable() {
-            // Google analytics
             JGoogleAnalyticsTracker tracker = new JGoogleAnalyticsTracker("EnvyClient", String.valueOf(Info.VERSION), "UA-78987238-4");
             FocusPoint focusPoint = new FocusPoint("Active");
             tracker.trackAsynchronously(focusPoint);

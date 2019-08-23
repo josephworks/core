@@ -2,6 +2,7 @@ package com.envyclient.core.util.web;
 
 import com.envyclient.core.util.GsonUtils;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,12 +37,12 @@ public class WebUtils {
         return response.toString();
     }
 
-    public static void getLatestVersion(Callback<Double> callback) {
+    public static void getLatestVersion(Callback<JsonObject> callback) {
         EXECUTOR_SERVICE.submit(() -> {
             try {
                 callback.onSuccess
                         (
-                                Double.parseDouble
+                                GsonUtils.toJsonObject
                                         (
                                                 get("https://download.envyclient.com/latest/latest.php")
                                         )
