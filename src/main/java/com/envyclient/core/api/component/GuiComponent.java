@@ -34,18 +34,18 @@ public abstract class GuiComponent {
         children.forEach(GuiComponent::updateScreen);
     }
 
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(float mouseX, float mouseY, float partialTicks) {
         // hover check
         hovered = mouseX >= x && mouseX <= (x + width) && mouseY >= y && mouseY <= (y + height);
 
         children.forEach(guiComponent -> guiComponent.drawScreen(mouseX, mouseY, partialTicks));
     }
 
-    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+    public void mouseClicked(float mouseX, float mouseY, int mouseButton) {
         children.forEach(guiComponent -> guiComponent.mouseClicked(mouseX, mouseY, mouseButton));
     }
 
-    public void mouseReleased(int mouseX, int mouseY, int state) {
+    public void mouseReleased(float mouseX, float mouseY, int state) {
         children.forEach(guiComponent -> guiComponent.mouseReleased(mouseX, mouseY, state));
     }
 

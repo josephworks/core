@@ -98,13 +98,13 @@ public class ComponentInput extends GuiComponent {
     }
 
     @Override
-    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+    public void mouseClicked(float mouseX, float mouseY, int mouseButton) {
         input.setFocused(hovered);
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(float mouseX, float mouseY, float partialTicks) {
         updateCoordinates();
 
         // drawing the input box background

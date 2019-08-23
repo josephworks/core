@@ -28,7 +28,7 @@ public class ComponentTitle extends GuiComponent {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(float mouseX, float mouseY, float partialTicks) {
         GlStateManager.pushMatrix();
 
         if (moving) {
@@ -50,7 +50,7 @@ public class ComponentTitle extends GuiComponent {
     }
 
     @Override
-    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+    public void mouseClicked(float mouseX, float mouseY, int mouseButton) {
         if (hovered) {
             switch (mouseButton) {
                 case 1: {
@@ -79,7 +79,7 @@ public class ComponentTitle extends GuiComponent {
     }
 
     @Override
-    public void mouseReleased(int mouseX, int mouseY, int state) {
+    public void mouseReleased(float mouseX, float mouseY, int state) {
         moving = false;
         super.mouseReleased(mouseX, mouseY, state);
     }

@@ -27,7 +27,7 @@ public class ComponentModule extends GuiComponent {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(float mouseX, float mouseY, float partialTicks) {
         setPosition(parent.getX(), (parent.getY() + 25 + 2) + ((height + 2) * moduleIndex));
 
         // extra hover check so you can't toggle modules from to panels at once
@@ -50,7 +50,7 @@ public class ComponentModule extends GuiComponent {
     }
 
     @Override
-    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+    public void mouseClicked(float mouseX, float mouseY, int mouseButton) {
 
         // toggle the module and play the button sound
         if (hovered && mouseButton == 0) {

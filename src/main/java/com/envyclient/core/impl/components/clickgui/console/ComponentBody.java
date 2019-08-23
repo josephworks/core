@@ -25,7 +25,7 @@ public class ComponentBody extends GuiComponent {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(float mouseX, float mouseY, float partialTicks) {
         if(!title.isOpen()){
             return;
         }
@@ -68,7 +68,7 @@ public class ComponentBody extends GuiComponent {
     }
 
     @Override
-    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+    public void mouseClicked(float mouseX, float mouseY, int mouseButton) {
         if(!title.isOpen()){
             return;
         }
@@ -76,7 +76,7 @@ public class ComponentBody extends GuiComponent {
     }
 
     @Override
-    public void mouseReleased(int mouseX, int mouseY, int state) {
+    public void mouseReleased(float mouseX, float mouseY, int state) {
         if(!title.isOpen()){
             return;
         }

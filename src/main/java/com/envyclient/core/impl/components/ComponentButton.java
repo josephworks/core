@@ -23,7 +23,7 @@ public class ComponentButton extends GuiComponent {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(float mouseX, float mouseY, float partialTicks) {
         hovered = (mouseX >= x && mouseX <= (x + width) && mouseY >= y && mouseY <= (y + height));
 
         Gui.drawRect(x, y, x + width, y + height,
@@ -35,7 +35,7 @@ public class ComponentButton extends GuiComponent {
     }
 
     @Override
-    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+    public void mouseClicked(float mouseX, float mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         if (!disabled && hovered && mouseButton == 0) {
             Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1));

@@ -42,7 +42,7 @@ public class ComponentPanel extends GuiComponent {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(float mouseX, float mouseY, float partialTicks) {
 
         // duplicate hover check
         hovered = mouseX >= x && mouseX <= (x + width) && mouseY >= y && mouseY <= (y + height);
@@ -76,7 +76,7 @@ public class ComponentPanel extends GuiComponent {
     }
 
     @Override
-    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+    public void mouseClicked(float mouseX, float mouseY, int mouseButton) {
 
         List<GuiComponent> componentsList = CLICK_GUI.getClickGUI().getComponentList();
         if (componentsList.indexOf(this) != componentsList.size() - 1 && componentsList.get(componentsList.size() - 1).isHovered()) {
@@ -113,7 +113,7 @@ public class ComponentPanel extends GuiComponent {
     }
 
     @Override
-    public void mouseReleased(int mouseX, int mouseY, int state) {
+    public void mouseReleased(float mouseX, float mouseY, int state) {
         moving = false;
         super.mouseReleased(mouseX, mouseY, state);
     }

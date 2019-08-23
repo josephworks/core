@@ -5,8 +5,11 @@ import com.envyclient.core.api.component.GuiComponent;
 import com.envyclient.core.api.module.Module;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -27,24 +30,35 @@ public class ClickGUI extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+
+        ScaledResolution wantedRes = getWantedResolution();
+
+        this.width = wantedRes.getScaledWidth();
+        this.height = wantedRes.getScaledHeight();
+
         GL11.glPushMatrix();
-        componentList.forEach(c -> c.drawScreen(mouseX, mouseY, partialTicks));
+        Vector2f mousePosition = getMousePosition();
+        mc.entityRenderer.setupOverlayRendering(wantedRes);
+        componentList.forEach(c -> c.drawScreen(mousePosition.getX(), mousePosition.getY(), partialTicks));
         GL11.glPopMatrix();
     }
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        componentList.forEach(c -> c.mouseClicked(mouseX, mouseY, mouseButton));
+        Vector2f mousePosition = getMousePosition();
+        componentList.forEach(c -> c.mouseClicked(mousePosition.getX(), mousePosition.getY(), mouseButton));
     }
 
     @Override
     protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-        componentList.forEach(c -> c.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick));
+        Vector2f mousePosition = getMousePosition();
+        componentList.forEach(c -> c.mouseClickMove(mousePosition.getX(), mousePosition.getY(), clickedMouseButton, timeSinceLastClick));
     }
 
     @Override
     protected void mouseReleased(int mouseX, int mouseY, int state) {
-        componentList.forEach(c -> c.mouseReleased(mouseX, mouseY, state));
+        Vector2f mousePosition = getMousePosition();
+        componentList.forEach(c -> c.mouseReleased(mousePosition.getX(), mousePosition.getY(), state));
     }
 
     @Override
@@ -70,6 +84,17 @@ public class ClickGUI extends GuiScreen {
     @Override
     public boolean doesGuiPauseGame() {
         return false;
+    }
+
+    private Vector2f getMousePosition() {
+        return new Vector2f(
+                Mouse.getX() * getWantedResolution().getScaledWidth() / (float) mc.displayWidth,
+                getWantedResolution().getScaledHeight() - Mouse.getY() * getWantedResolution().getScaledHeight() / (float) mc.displayHeight - 1
+        );
+    }
+
+    public ScaledResolution getWantedResolution() {
+        return new ScaledResolution(mc, 2);
     }
 
     public List<GuiComponent> getComponentList() {

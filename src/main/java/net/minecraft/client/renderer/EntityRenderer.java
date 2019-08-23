@@ -1888,8 +1888,12 @@ public class EntityRenderer implements IResourceManagerReloadListener {
     /**
      * Setup orthogonal projection for rendering GUI screen overlays
      */
+
     public void setupOverlayRendering() {
-        ScaledResolution scaledresolution = new ScaledResolution(this.mc);
+        setupOverlayRendering(new ScaledResolution(this.mc));
+    }
+
+    public void setupOverlayRendering(ScaledResolution scaledresolution) {
         GlStateManager.clear(256);
         GlStateManager.matrixMode(5889);
         GlStateManager.loadIdentity();

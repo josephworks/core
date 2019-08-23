@@ -1,5 +1,6 @@
 package com.envyclient.core.util.render;
 
+import com.envyclient.core.impl.guiscreen.ClickGUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -16,6 +17,10 @@ public class RenderUtils {
 
     public static void prepareScissorBox(double x, double y, double x2, double y2) {
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
+        if (Minecraft.getMinecraft().currentScreen instanceof ClickGUI) {
+            sr = ((ClickGUI) Minecraft.getMinecraft().currentScreen).getWantedResolution();
+        }
+
         int factor = sr.getScaleFactor();
         GL11.glScissor((int) (x * factor), (int) ((sr.getScaledHeight() - y2) * factor), (int) ((x2 - x) * factor), (int) ((y2 - y) * factor));
     }
