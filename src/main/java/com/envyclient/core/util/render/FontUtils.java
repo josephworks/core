@@ -28,18 +28,18 @@ public class FontUtils {
     }
 
     public static void drawCenteredString(String text, double x, double y, int color) {
-        drawString(text, x - fontRenderer.getStringWidth(text) / 2, y, color);
+        drawString(text, x - fontRenderer.getStringWidth(text) / 2.0D, y, color);
     }
 
     public static void drawCenteredStringWithShadow(String text, double x, double y, int color) {
-        drawStringWithShadow(text, x - fontRenderer.getStringWidth(text) / 2, y, color);
+        drawStringWithShadow(text, x - fontRenderer.getStringWidth(text) / 2.0D, y, color);
     }
 
     public static void drawTotalCenteredString(String text, double x, double y, int color) {
-        drawString(text, x - fontRenderer.getStringWidth(text) / 2, y - getFontHeight() / 2, color);
+        drawString(text, x - fontRenderer.getStringWidth(text) / 2.0D, y - getFontHeight() / 2.0D, color);
     }
 
     public static void drawTotalCenteredStringWithShadow(String text, double x, double y, int color) {
-        drawStringWithShadow(text, x - fontRenderer.getStringWidth(text) / 2, y - getFontHeight() / 2F, color);
+        drawStringWithShadow(text, x - fontRenderer.getStringWidth(text) / 2.0D, y - getFontHeight() / 2F, color);
     }
 }

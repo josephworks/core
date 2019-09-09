@@ -11,7 +11,6 @@ import com.google.gson.JsonObject;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.ihaq.eventmanager.EventManager;
 import me.ihaq.imguruploader.ImgurUploader;
-import optifine.Json;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
@@ -127,18 +126,17 @@ public class Envy implements Loader {
         private static void invokeLoader(Class clazz, Object parent, boolean enable) {
             Arrays.stream(clazz.getDeclaredFields()).forEach(field -> {
                 try {
-
                     field.setAccessible(true);
 
                     Object obj = field.get(parent);
                     if (obj instanceof Loader) {
+                        Loader loader = (Loader) obj;
                         if (enable) {
-                            ((Loader) obj).enable();
+                            loader.enable();
                         } else {
-                            ((Loader) obj).disable();
+                            loader.disable();
                         }
                     }
-
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }

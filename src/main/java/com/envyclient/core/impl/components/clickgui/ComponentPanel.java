@@ -1,7 +1,6 @@
 package com.envyclient.core.impl.components.clickgui;
 
 import com.envyclient.core.api.component.GuiComponent;
-import com.envyclient.core.api.module.Module;
 import com.envyclient.core.api.module.type.Category;
 import com.envyclient.core.util.render.FontUtils;
 import net.minecraft.client.Minecraft;
@@ -11,6 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.envyclient.core.Envy.Colors.*;
 import static com.envyclient.core.Envy.Managers.CLICK_GUI;
@@ -28,17 +28,25 @@ public class ComponentPanel extends GuiComponent {
     public ComponentPanel(Category category, double x, double y, int width) {
         super(category.getName(), x, y, width, 0);
 
-        int modulesOffset = 2;
         int moduleButtonHeight = 18;
-        List<Module> moduleList = MODULE.getModules(category);
-        for (int i = 0; i < moduleList.size(); i++) {
-            children.add(
-                    new ComponentModule(this, moduleList.get(i), moduleButtonHeight, i)
-            );
-            modulesOffset += (moduleButtonHeight + 2);
-        }
 
-        height = 25 + modulesOffset;
+        AtomicInteger modulesOffset = new AtomicInteger(2);
+        AtomicInteger mHeight = new AtomicInteger(0);
+        MODULE.getModules(category).forEach(module ->
+                {
+                    children.add(
+                            new ComponentModule(
+                                    this,
+                                    module,
+                                    moduleButtonHeight,
+                                    mHeight.getAndSet(moduleButtonHeight)
+                            )
+                    );
+                    modulesOffset.addAndGet((moduleButtonHeight + 2));
+                }
+        );
+
+        height = 25 + modulesOffset.get();
     }
 
     @Override
@@ -67,8 +75,13 @@ public class ComponentPanel extends GuiComponent {
 
         if (open) {
 
+            AtomicInteger yOffset = new AtomicInteger(0);
+            getChildren().stream().filter(guiComponent -> guiComponent instanceof ComponentModule)
+                    .map(ComponentModule.class::cast)
+                    .forEach(module -> module.setyOffset(yOffset.getAndAdd(module.getHeight() + 2)));
+
             // modules list background
-            Gui.drawRect(x, y + 25, x + width, y + height + 1, SECONDARY_BRIGHTER);
+            Gui.drawRect(x, y + 25, x + width, y + 25 + yOffset.get() + 4, SECONDARY_BRIGHTER);
 
             super.drawScreen(mouseX, mouseY, partialTicks);
         }

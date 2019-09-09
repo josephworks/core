@@ -26,7 +26,7 @@ public class ComponentBody extends GuiComponent {
 
     @Override
     public void drawScreen(float mouseX, float mouseY, float partialTicks) {
-        if(!title.isOpen()){
+        if (!title.isOpen()) {
             return;
         }
 
@@ -53,7 +53,7 @@ public class ComponentBody extends GuiComponent {
 
     @Override
     public void initGui() {
-        if(!title.isOpen()){
+        if (!title.isOpen()) {
             return;
         }
         super.initGui();
@@ -61,7 +61,7 @@ public class ComponentBody extends GuiComponent {
 
     @Override
     public void updateScreen() {
-        if(!title.isOpen()){
+        if (!title.isOpen()) {
             return;
         }
         super.updateScreen();
@@ -69,7 +69,7 @@ public class ComponentBody extends GuiComponent {
 
     @Override
     public void mouseClicked(float mouseX, float mouseY, int mouseButton) {
-        if(!title.isOpen()){
+        if (!title.isOpen()) {
             return;
         }
         super.mouseClicked(mouseX, mouseY, mouseButton);
@@ -77,7 +77,7 @@ public class ComponentBody extends GuiComponent {
 
     @Override
     public void mouseReleased(float mouseX, float mouseY, int state) {
-        if(!title.isOpen()){
+        if (!title.isOpen()) {
             return;
         }
         super.mouseReleased(mouseX, mouseY, state);
@@ -85,7 +85,7 @@ public class ComponentBody extends GuiComponent {
 
     @Override
     public void mouseClickMove(float mouseX, float mouseY, int mouseButton, long timeSinceLastClick) {
-        if(!title.isOpen()){
+        if (!title.isOpen()) {
             return;
         }
         super.mouseClickMove(mouseX, mouseY, mouseButton, timeSinceLastClick);
@@ -93,7 +93,7 @@ public class ComponentBody extends GuiComponent {
 
     @Override
     public void keyTyped(char typedChar, int keyCode) {
-        if(!title.isOpen()){
+        if (!title.isOpen()) {
             return;
         }
         super.keyTyped(typedChar, keyCode);
@@ -101,7 +101,7 @@ public class ComponentBody extends GuiComponent {
 
     @Override
     public void onGuiClosed() {
-        if(!title.isOpen()){
+        if (!title.isOpen()) {
             return;
         }
         super.onGuiClosed();
