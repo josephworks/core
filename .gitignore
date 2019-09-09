@@ -34,8 +34,10 @@ workspace/logs/
 workspace/assets/
 workspace/saves/
 workspace/screenshots/
+workspace/Envy/
 workspace/usercache.json
 workspace/options.txt
+workspace/optionsof.txt
 workspace/servers.dat
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
