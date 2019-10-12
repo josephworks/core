@@ -78,7 +78,7 @@ public class ComponentPanel extends GuiComponent {
             AtomicInteger yOffset = new AtomicInteger(0);
             getChildren().stream().filter(guiComponent -> guiComponent instanceof ComponentModule)
                     .map(ComponentModule.class::cast)
-                    .forEach(module -> module.setyOffset(yOffset.getAndAdd(module.getHeight() + 2)));
+                    .forEach(module -> module.setYOffset(yOffset.getAndAdd(module.getHeight() + 2)));
 
             // modules list background
             Gui.drawRect(x, y + 25, x + width, y + 25 + yOffset.get() + 4, SECONDARY_BRIGHTER);

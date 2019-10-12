@@ -14,7 +14,7 @@ public class ComponentValue extends GuiComponent {
     private Setting<?> setting;
     private int index;
 
-    public ComponentValue(Setting<?> setting, ComponentModule parent, int width, int height, int index) {
+    ComponentValue(Setting<?> setting, ComponentModule parent, int width, int height, int index) {
         super(parent.getX(), parent.getY(), width, height);
         this.parent = parent;
         this.setting = setting;
@@ -27,8 +27,9 @@ public class ComponentValue extends GuiComponent {
 
         hovered = mouseX >= x && mouseX <= (x + width) && mouseY >= y && mouseY <= (y + height);
 
-        Gui.drawRect(x + 5, y, x + width, y + height, hovered ? new Color(37, 37, 37, 195).brighter().getRGB() :
-                Envy.Colors.SECONDARY);
+        Gui.drawRect(x, y, x + width, y + height,
+                hovered ? new Color(37, 37, 37, 195).brighter().getRGB() : Envy.Colors.SECONDARY
+        );
 
         FontUtils.drawTotalCenteredString(setting.getName(), x + width / 2, y + height / 2, -1);
 

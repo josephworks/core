@@ -44,9 +44,9 @@ public class ClampedSetting extends Setting<Double> {
     @Override
     public void setValue(Double value) {
         try {
-            if (onlyInt()) { // int
+            if (onlyInt()) {
                 getField().setInt(getModule(), value.intValue());
-            } else { // double
+            } else {
                 getField().setDouble(getModule(), value);
             }
         } catch (IllegalAccessException e) {

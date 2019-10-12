@@ -27,7 +27,7 @@ public class ComponentModule extends GuiComponent {
 
     private List<ComponentValue> valueList;
 
-    public ComponentModule(ComponentPanel parent, Module module, int height, int yOffset) {
+    ComponentModule(ComponentPanel parent, Module module, int height, int yOffset) {
         super(module.getName(), 0, 0, parent.getWidth() - 5, height);
         this.parent = parent;
         this.module = module;
@@ -38,8 +38,11 @@ public class ComponentModule extends GuiComponent {
         this.valueList = new ArrayList<>();
 
         AtomicInteger index = new AtomicInteger(1);
-        Envy.Managers.SETTING.getSettings(module).forEach(setting -> valueList.add(new ComponentValue(setting,
-                ComponentModule.this, width - xShrink, height, index.getAndAdd(1))));
+        Envy.Managers.SETTING.getSettings(module)
+                .forEach(setting -> valueList.add(
+                        new ComponentValue(setting, ComponentModule.this, width - xShrink, height, index.getAndAdd(1))
+                        )
+                );
     }
 
     @Override
@@ -90,11 +93,11 @@ public class ComponentModule extends GuiComponent {
         return super.getHeight() + (expanded ? valueList.size() * (height + yMargin) : 0);
     }
 
-    public int getXShrink() {
+    int getXShrink() {
         return xShrink;
     }
 
-    public void setyOffset(int yOffset) {
+    void setYOffset(int yOffset) {
         this.yOffset = yOffset;
     }
 

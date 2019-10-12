@@ -25,18 +25,18 @@ public class AltLogin extends GuiScreen {
 
     private String status = ChatFormatting.GRAY + "Idle...";
     private GuiTextField username, password, combo;
-    private GuiButton add;
+    private GuiButton loginButton;
 
     @Override
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
 
-        buttonList.add(add = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 92 + 12, "Login"));
-        buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 92 + 12 + 25, "Back"));
+        buttonList.add(loginButton = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 92 + 12 + 10, "Login"));
+        buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 92 + 12 + 25 + 10, "Back"));
 
         username = new GuiTextField(eventButton, mc.fontRendererObj, width / 2 - 100, 60, 200, 20);
         password = new GuiTextField(eventButton, fontRendererObj, width / 2 - 100, 94, 200, 20).setPassword(true);
-        combo = new GuiTextField(eventButton, mc.fontRendererObj, width / 2 - 100, 128 + 5, 200, 20).setMaxStringLength(200);
+        combo = new GuiTextField(eventButton, mc.fontRendererObj, width / 2 - 100, 128 + 5 + 10, 200, 20).setMaxStringLength(200);
     }
 
     @Override
@@ -72,10 +72,21 @@ public class AltLogin extends GuiScreen {
         GL11.glPushMatrix();
         GL11.glColor4f(1, 1, 1, 1);
 
-        handleAddButton();
+        // handling the login button
+        // checks if info was entered in the right inputs
+        if (username.getText().isEmpty() && password.getText().isEmpty() && combo.getText().isEmpty()) {
+            loginButton.enabled = false;
+        } else if (username.getText().isEmpty() && password.getText().isEmpty() && !combo.getText().isEmpty() && combo.getText().split(":").length >= 2) {
+            loginButton.enabled = true;
+        } else if (!username.getText().isEmpty() && combo.getText().isEmpty()) {
+            loginButton.enabled = true;
+        } else if (!username.getText().isEmpty() && !combo.getText().isEmpty()) {
+            loginButton.enabled = false;
+        }
+
         drawDefaultBackground();
 
-        /** Render the buttons. **/
+        // rendering the buttons
         super.drawScreen(mouseX, mouseY, partialTicks);
 
         username.drawTextBox();
@@ -87,14 +98,19 @@ public class AltLogin extends GuiScreen {
 
         FontUtils.drawCenteredStringWithShadow("Alt Login", this.width / 2, 40, -1);
 
-        if (username.getText().isEmpty())
+        if (username.getText().isEmpty()) {
             FontUtils.drawString("Username / E-Mail", this.width / 2 - 96, 66, Color.GRAY.getRGB());
+        }
 
-        if (password.getText().isEmpty())
+        if (password.getText().isEmpty()) {
             FontUtils.drawString("Password", this.width / 2 - 96, 100, Color.GRAY.getRGB());
+        }
 
-        if (combo.getText().isEmpty())
-            FontUtils.drawString("EMAIL:PASSWORD", this.width / 2 - 96, 134 + 5, Color.GRAY.getRGB());
+        FontUtils.drawCenteredStringWithShadow("OR", this.width / 2, 125, -1);
+
+        if (combo.getText().isEmpty()) {
+            FontUtils.drawString("EMAIL:PASSWORD", this.width / 2 - 96, 134 + 5 + 10, Color.GRAY.getRGB());
+        }
 
         GL11.glPopMatrix();
     }
@@ -124,7 +140,6 @@ public class AltLogin extends GuiScreen {
         username.textboxKeyTyped(typedChar, keyCode);
         password.textboxKeyTyped(typedChar, keyCode);
         combo.textboxKeyTyped(typedChar, keyCode);
-
     }
 
     @Override
@@ -134,18 +149,6 @@ public class AltLogin extends GuiScreen {
         username.mouseClicked(mouseX, mouseY, mouseButton);
         password.mouseClicked(mouseX, mouseY, mouseButton);
         combo.mouseClicked(mouseX, mouseY, mouseButton);
-    }
-
-
-    private void handleAddButton() {
-        if (username.getText().isEmpty() && password.getText().isEmpty() && combo.getText().isEmpty())
-            add.enabled = false;
-        else if (username.getText().isEmpty() && password.getText().isEmpty() && !combo.getText().isEmpty() && combo.getText().split(":").length >= 2)
-            add.enabled = true;
-        else if (!username.getText().isEmpty() && combo.getText().isEmpty())
-            add.enabled = true;
-        else if (!username.getText().isEmpty() && !combo.getText().isEmpty())
-            add.enabled = false;
     }
 
     private Session createSession(String username, String password) {
